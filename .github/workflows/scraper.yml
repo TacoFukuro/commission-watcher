@@ -1,20 +1,13 @@
 name: Run Scraper
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: "*/5 * * * *"  # Runs every 5 minutes for testing
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    # ← Add this block so the job can see your secrets
-    env:
-      EMAIL_ADDRESS:  ${{ secrets.EMAIL_ADDRESS }}
-      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-      TARGET_URL:     ${{ secrets.TARGET_URL }}
-      SMTP_SERVER:    ${{ secrets.SMTP_SERVER }}
-      SMTP_PORT:      ${{ secrets.SMTP_PORT }}
 
     steps:
       - uses: actions/checkout@v2
