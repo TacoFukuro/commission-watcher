@@ -2,21 +2,20 @@ name: Run Scraper
 
 on:
   schedule:
-    - cron:  '*/10 * * * *'
+    - cron: '*/10 * * * *'
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    # ← inject the secrets here for the entire job
+    # ← Add this block so the job can see your secrets
     env:
-      EMAIL_ADDRESS:    ${{ secrets.EMAIL_ADDRESS }}
-      EMAIL_PASSWORD:   ${{ secrets.EMAIL_PASSWORD }}
-      TARGET_URL:       ${{ secrets.TARGET_URL }}
-      # OPTIONAL: override defaults if you set these as secrets too
-      SMTP_SERVER:      ${{ secrets.SMTP_SERVER }}
-      SMTP_PORT:        ${{ secrets.SMTP_PORT }}
+      EMAIL_ADDRESS:  ${{ secrets.EMAIL_ADDRESS }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+      TARGET_URL:     ${{ secrets.TARGET_URL }}
+      SMTP_SERVER:    ${{ secrets.SMTP_SERVER }}
+      SMTP_PORT:      ${{ secrets.SMTP_PORT }}
 
     steps:
       - uses: actions/checkout@v2
@@ -27,7 +26,9 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: pip install --upgrade pip && pip install -r requirements.txt
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run scraper
         run: python scraper.py
