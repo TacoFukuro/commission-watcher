@@ -22,7 +22,7 @@ def send_email():
     msg.set_content(f"🚨 Commissions are Close! Visit: {URL}")
     msg["Subject"] = "Commission Alert"
     msg["From"] = os.getenv("EMAIL_ADDRESS")
-    msg["To"]   = os.getenv("EMAIL_ADDRESS")
+    msg["To"]   = os.getenv("EMAIL_NOTIFICATION=")
 
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
         smtp.login(os.getenv("EMAIL_ADDRESS"), os.getenv("EMAIL_PASSWORD"))
