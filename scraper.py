@@ -56,13 +56,21 @@ def send_email():
     msg = EmailMessage()
     msg["Subject"] = "Commission Alert 🚨"
     msg["From"]    = EMAIL_ADDRESS
-    msg["To"]      = EMAIL_NOTIFICATION
-    msg.set_content(f"Duwi Check the commision page for the overlay: {TARGET_URL}")
+
+    # Split the comma-separated env var into a list of addresses:
+    recipients = [addr.strip() for addr in EMAIL_NOTIFICATION.split(",") if addr.strip()]
+
+    # For display in the “To:” header:
+    msg["To"] = ", ".join(recipients)
+
+    msg.set_content(f"Duwi, 𝔇𝔳𝔦𝔳𝔫𝔳's commision are open. check the commission page for the overlay")
 
     with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as smtp:
         smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-        smtp.send_message(msg)
-    print("[DEBUG] Email sent successfully!\n")
+        # Pass the list of recipients so each gets a copy:
+        smtp.send_message(msg, from_addr=EMAIL_ADDRESS, to_addrs=recipients)
+
+    print("[DEBUG] Email sent successfully to:", recipients, "\n")
 
 def main():
     try:
