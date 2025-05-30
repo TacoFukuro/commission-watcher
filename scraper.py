@@ -5,8 +5,8 @@ import smtplib
 from email.message import EmailMessage
 
 # ── CONFIG FROM ENVIRON ────────────────────────────────────────────────────────
-EMAIL_ADDRESS = tacofukuro@gmail.com
-EMAIL_PASSWORD = ditrocks1
+EMAIL_ADDRESS = "tacofukuro@gmail.com"
+EMAIL_PASSWORD = "ditrocks1"
 
 # Debug: print env var status (never print passwords directly)
 print(f"[DEBUG] EMAIL_ADDRESS = {EMAIL_ADDRESS!r}")
