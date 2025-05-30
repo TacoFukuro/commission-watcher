@@ -3,7 +3,7 @@ name: Run Scraper
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"  # Runs every 5 minutes for testing
+    - cron: "2-59/5 * * * *"  # Runs every 5 minutes for testing
 
 jobs:
   build:
