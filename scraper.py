@@ -5,12 +5,17 @@ import smtplib
 from email.message import EmailMessage
 
 # ── CONFIG FROM ENVIRON ────────────────────────────────────────────────────────
-# In GitHub Actions, set these under Settings → Secrets and Variables → Actions
 EMAIL_ADDRESS = os.environ["EMAIL_ADDRESS"]
 EMAIL_PASSWORD = os.environ["EMAIL_PASSWORD"]
-TARGET_URL     = os.environ.get("TARGET_URL", "https://dvivnv.carrd.co/#english")
-SMTP_SERVER    = os.environ.get("SMTP_SERVER", "smtp.gmail.com")
-SMTP_PORT      = int(os.environ.get("SMTP_PORT", 465))
+TARGET_URL    = os.environ.get("TARGET_URL", "https://dvivnv.carrd.co/#english")
+SMTP_SERVER   = os.environ.get("SMTP_SERVER", "smtp.gmail.com")
+
+# Load port; if the env var is missing or not a valid integer, fall back to 465
+_port_str = os.environ.get("SMTP_PORT", "").strip()
+if _port_str.isdigit():
+    SMTP_PORT = int(_port_str)
+else:
+    SMTP_PORT = 465
 # ───────────────────────────────────────────────────────────────────────────────
 
 def check_site() -> bool:
@@ -35,7 +40,7 @@ def main():
         if check_site():
             send_email()
     except Exception as e:
-        # This will surface errors in your GitHub Actions or Render logs
+        # This will surface errors in your GitHub Actions logs
         print(f"[ERROR] {e}")
 
 if __name__ == "__main__":
