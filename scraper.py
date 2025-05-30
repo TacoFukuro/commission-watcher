@@ -35,7 +35,11 @@ def check_site() -> bool:
     resp = requests.get(TARGET_URL, headers=headers)
     print(f"[DEBUG] HTTP status code: {resp.status_code}")
     resp.raise_for_status()
-    found = "<strong>closed</strong>" in resp.text
+        # Define the list of target substrings
+    target_keywords = ["<strong>closed</strong>","<strong>open</strong>", "<strong>opened</strong>", "<strong>opening</strong>","<strong>Open</strong>", "<strong>Opened</strong>", "<strong>Opening</strong>",]
+
+    # Check if any of the target keywords are present in the response text
+    found = any(keyword in response_text_lower for keyword in target_keywords)
     print(f"[DEBUG] Found 'Commissions Open'?: {found}\n")
     return found
 
@@ -45,7 +49,7 @@ def send_email():
     msg["Subject"] = "Commission Alert 🚨"
     msg["From"]    = EMAIL_ADDRESS
     msg["To"]      = EMAIL_NOTIFICATION
-    msg.set_content(f"Commissions are OPEN! Check here: {TARGET_URL}")
+    msg.set_content(f"Duwi Check the commision page for the overlay: {TARGET_URL}")
 
     with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as smtp:
         smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
