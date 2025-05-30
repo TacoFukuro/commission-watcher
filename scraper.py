@@ -6,13 +6,14 @@ from email.message import EmailMessage
 
 # ── CONFIG FROM ENVIRON ────────────────────────────────────────────────────────
 EMAIL_ADDRESS = "tacofukuro@gmail.com"
-EMAIL_PASSWORD = "ifcx uzyt qgqp htng "
+EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+EMAIL_NOTIFICATION = os.environ.get('EMAIL_NOTIFICATION')
 
 # Debug: print env var status (never print passwords directly)
 print(f"[DEBUG] EMAIL_ADDRESS = {EMAIL_ADDRESS!r}")
 print(f"[DEBUG] EMAIL_PASSWORD set? {'yes' if EMAIL_PASSWORD else 'no'}")
 print(f"[DEBUG] RAW TARGET_URL = {os.environ.get('TARGET_URL')!r}")
-print(f"[DEBUG] RAW EMAIL_NOTIFICATION = {os.environ.get('EMAIL_NOTIFICATION')!r}")
+print(f"[DEBUG] RAW EMAIL_NOTIFICATION = {EMAIL_NOTIFICATION!r}")
 print(f"[DEBUG] RAW SMTP_SERVER  = {os.environ.get('SMTP_SERVER')!r}")
 print(f"[DEBUG] RAW SMTP_PORT    = {os.environ.get('SMTP_PORT')!r}\n")
 
@@ -43,7 +44,7 @@ def send_email():
     msg = EmailMessage()
     msg["Subject"] = "Commission Alert 🚨"
     msg["From"]    = EMAIL_ADDRESS
-    msg["To"]      = EMAIL_ADDRESS
+    msg["To"]      = EMAIL_NOTIFICATION
     msg.set_content(f"Commissions are OPEN! Check here: {TARGET_URL}")
 
     with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as smtp:
