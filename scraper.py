@@ -33,7 +33,7 @@ def check_site() -> bool:
     resp = requests.get(TARGET_URL, headers=headers)
     print(f"[DEBUG] HTTP status code: {resp.status_code}")
     resp.raise_for_status()
-    found = "commissions: closed" in resp.text
+    found = "closed" in resp.text
     print(f"[DEBUG] get text: {resp.text}\n")
     print(f"[DEBUG] Found 'Commissions Open'?: {found}\n")
     return found
