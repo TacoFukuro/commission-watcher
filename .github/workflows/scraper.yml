@@ -3,7 +3,6 @@ name: Run Scraper
 on:
   schedule:
     - cron: '*/10 * * * *'
-  workflow_dispatch:
 
 jobs:
   build:
