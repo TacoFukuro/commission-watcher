@@ -5,8 +5,8 @@ import smtplib
 from email.message import EmailMessage
 
 # ── CONFIG FROM ENVIRON ────────────────────────────────────────────────────────
-EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS")
-EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+EMAIL_ADDRESS = tacofukuro@gmail.com
+EMAIL_PASSWORD = ditrocks1
 
 # Debug: print env var status (never print passwords directly)
 print(f"[DEBUG] EMAIL_ADDRESS = {EMAIL_ADDRESS!r}")
@@ -33,7 +33,7 @@ def check_site() -> bool:
     resp = requests.get(TARGET_URL, headers=headers)
     print(f"[DEBUG] HTTP status code: {resp.status_code}")
     resp.raise_for_status()
-    found = "Commissions Open" in resp.text
+    found = "commissions: closed" in resp.text
     print(f"[DEBUG] Found 'Commissions Open'?: {found}\n")
     return found
 
