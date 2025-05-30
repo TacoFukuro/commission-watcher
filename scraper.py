@@ -12,6 +12,7 @@ EMAIL_PASSWORD = "ifcx uzyt qgqp htng "
 print(f"[DEBUG] EMAIL_ADDRESS = {EMAIL_ADDRESS!r}")
 print(f"[DEBUG] EMAIL_PASSWORD set? {'yes' if EMAIL_PASSWORD else 'no'}")
 print(f"[DEBUG] RAW TARGET_URL = {os.environ.get('TARGET_URL')!r}")
+print(f"[DEBUG] RAW EMAIL_NOTIFICATION = {os.environ.get('EMAIL_NOTIFICATION')!r}")
 print(f"[DEBUG] RAW SMTP_SERVER  = {os.environ.get('SMTP_SERVER')!r}")
 print(f"[DEBUG] RAW SMTP_PORT    = {os.environ.get('SMTP_PORT')!r}\n")
 
