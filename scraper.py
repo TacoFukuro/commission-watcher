@@ -35,11 +35,20 @@ def check_site() -> bool:
     resp = requests.get(TARGET_URL, headers=headers)
     print(f"[DEBUG] HTTP status code: {resp.status_code}")
     resp.raise_for_status()
-        # Define the list of target substrings
-    target_keywords = ["<strong>closed</strong>","<strong>open</strong>", "<strong>opened</strong>", "<strong>opening</strong>","<strong>Open</strong>", "<strong>Opened</strong>", "<strong>Opening</strong>",]
+
+    # Define the list of target status strings
+    target_keywords = [
+        "<strong>closed</strong>",
+        "<strong>open</strong>",
+        "<strong>opened</strong>",
+        "<strong>opening</strong>",
+        "<strong>Open</strong>",
+        "<strong>Opened</strong>",
+        "<strong>Opening</strong>"
+    ]
 
     # Check if any of the target keywords are present in the response text
-    found = any(keyword in response_text_lower for keyword in target_keywords)
+    found = any(keyword in resp.text for keyword in target_keywords)
     print(f"[DEBUG] Found 'Commissions Open'?: {found}\n")
     return found
 
