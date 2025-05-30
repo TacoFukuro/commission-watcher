@@ -38,7 +38,6 @@ def check_site() -> bool:
 
     # Define the list of target status strings
     target_keywords = [
-        "<strong>closed</strong>",
         "<strong>open</strong>",
         "<strong>OPEN</strong>",
         "<strong>opened</strong>",
