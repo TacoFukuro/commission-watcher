@@ -8,12 +8,12 @@ from email.message import EmailMessage
 EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS")
 EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 
-# Debug: show what we read (never print passwords)
+# Debug: print env var status (never print passwords directly)
 print(f"[DEBUG] EMAIL_ADDRESS = {EMAIL_ADDRESS!r}")
 print(f"[DEBUG] EMAIL_PASSWORD set? {'yes' if EMAIL_PASSWORD else 'no'}")
 print(f"[DEBUG] RAW TARGET_URL = {os.environ.get('TARGET_URL')!r}")
 print(f"[DEBUG] RAW SMTP_SERVER  = {os.environ.get('SMTP_SERVER')!r}")
-print(f"[DEBUG] RAW SMTP_PORT    = {os.environ.get('SMTP_PORT')!r}")
+print(f"[DEBUG] RAW SMTP_PORT    = {os.environ.get('SMTP_PORT')!r}\n")
 
 # Use defaults if any of the above are missing/empty
 _raw_url = os.environ.get("TARGET_URL", "").strip()
@@ -59,4 +59,6 @@ def main():
     except Exception as e:
         print(f"[ERROR] {e}")
 
+
 if __name__ == "__main__":
+    main()
